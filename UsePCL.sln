@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_planar_segmentation", "01_planar_segmentation\01_planar_segmentation.vcxproj", "{77E84788-FDF0-44F4-BF38-5648355B4C29}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_cylinder_segmentation", "02_cylinder_segmentation\02_cylinder_segmentation.vcxproj", "{3968D547-2934-4992-8DF5-0AB90B1FA31B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03_view_range_image", "03_view_range_image\03_view_range_image.vcxproj", "{37CA71FD-316A-49E3-9786-D67DF781D7A4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_narf_keypoint_extraction", "04_narf_keypoint_extraction\04_narf_keypoint_extraction.vcxproj", "{026DB8D7-18A9-4E73-B610-F77A59376EB9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_Recognition", "05_Recognition\05_Recognition.vcxproj", "{1F8BBCD0-A9A2-42AB-B1AA-4F50B920EB1D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "06_pairwise_incremental_registration", "06_pairwise_incremental_registration\06_pairwise_incremental_registration.vcxproj", "{A4A373C0-C4FB-4A64-BA8E-C00F0FF5F12F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77E84788-FDF0-44F4-BF38-5648355B4C29}.Debug|Win32.ActiveCfg = Debug|Win32
+		{77E84788-FDF0-44F4-BF38-5648355B4C29}.Debug|Win32.Build.0 = Debug|Win32
+		{77E84788-FDF0-44F4-BF38-5648355B4C29}.Release|Win32.ActiveCfg = Release|Win32
+		{77E84788-FDF0-44F4-BF38-5648355B4C29}.Release|Win32.Build.0 = Release|Win32
+		{3968D547-2934-4992-8DF5-0AB90B1FA31B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3968D547-2934-4992-8DF5-0AB90B1FA31B}.Debug|Win32.Build.0 = Debug|Win32
+		{3968D547-2934-4992-8DF5-0AB90B1FA31B}.Release|Win32.ActiveCfg = Release|Win32
+		{3968D547-2934-4992-8DF5-0AB90B1FA31B}.Release|Win32.Build.0 = Release|Win32
+		{37CA71FD-316A-49E3-9786-D67DF781D7A4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{37CA71FD-316A-49E3-9786-D67DF781D7A4}.Debug|Win32.Build.0 = Debug|Win32
+		{37CA71FD-316A-49E3-9786-D67DF781D7A4}.Release|Win32.ActiveCfg = Release|Win32
+		{37CA71FD-316A-49E3-9786-D67DF781D7A4}.Release|Win32.Build.0 = Release|Win32
+		{026DB8D7-18A9-4E73-B610-F77A59376EB9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{026DB8D7-18A9-4E73-B610-F77A59376EB9}.Debug|Win32.Build.0 = Debug|Win32
+		{026DB8D7-18A9-4E73-B610-F77A59376EB9}.Release|Win32.ActiveCfg = Release|Win32
+		{026DB8D7-18A9-4E73-B610-F77A59376EB9}.Release|Win32.Build.0 = Release|Win32
+		{1F8BBCD0-A9A2-42AB-B1AA-4F50B920EB1D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1F8BBCD0-A9A2-42AB-B1AA-4F50B920EB1D}.Debug|Win32.Build.0 = Debug|Win32
+		{1F8BBCD0-A9A2-42AB-B1AA-4F50B920EB1D}.Release|Win32.ActiveCfg = Release|Win32
+		{1F8BBCD0-A9A2-42AB-B1AA-4F50B920EB1D}.Release|Win32.Build.0 = Release|Win32
+		{A4A373C0-C4FB-4A64-BA8E-C00F0FF5F12F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A4A373C0-C4FB-4A64-BA8E-C00F0FF5F12F}.Debug|Win32.Build.0 = Debug|Win32
+		{A4A373C0-C4FB-4A64-BA8E-C00F0FF5F12F}.Release|Win32.ActiveCfg = Release|Win32
+		{A4A373C0-C4FB-4A64-BA8E-C00F0FF5F12F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
