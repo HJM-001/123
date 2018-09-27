@@ -37,7 +37,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *
  * $Id$
- *
+ * 
  */
 
 /* \author Radu Bogdan Rusu
@@ -60,6 +60,8 @@
 #include <pcl/registration/transforms.h>
 
 #include <pcl/visualization/pcl_visualizer.h>
+
+ #include <use_pcl.h>
 
 using pcl::visualization::PointCloudColorHandlerGenericField;
 using pcl::visualization::PointCloudColorHandlerCustom;
@@ -378,7 +380,3 @@ int main (int argc, char** argv)
    PCL_INFO ("Aligning finished.\n");
 }
 /* ]--- */
-
-
-
-

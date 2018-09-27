@@ -29,7 +29,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="06_pairwise_incremental_registration.cpp">
+    <ClCompile Include="My06_pairwise.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

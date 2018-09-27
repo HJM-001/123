@@ -1,5 +1,5 @@
 
-#include "use_pcl_lib.h"
+
 #include <iostream>
 #include <pcl/ModelCoefficients.h>
 #include <pcl/io/pcd_io.h>
@@ -7,7 +7,7 @@
 #include <pcl/sample_consensus/method_types.h>
 #include <pcl/sample_consensus/model_types.h>
 #include <pcl/segmentation/sac_segmentation.h>
-
+#include <use_pcl.h>
 
 int
 	main (int argc, char** argv)

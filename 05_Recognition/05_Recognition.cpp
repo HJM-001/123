@@ -19,7 +19,7 @@
 #include <pcl/kdtree/impl/kdtree_flann.hpp>
 #include <pcl/common/transforms.h>
 #include <pcl/console/parse.h>
-
+#include<use_pcl.h>
 
 typedef pcl::PointXYZRGBA PointType;
 typedef pcl::Normal NormalType;
