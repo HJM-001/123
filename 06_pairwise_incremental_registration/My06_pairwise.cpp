@@ -42,7 +42,7 @@
 
 /* \author Radu Bogdan Rusu
 * adaptation Raphael Favier*/
-
+#include <use_pcl.h>
 #include <boost/make_shared.hpp>
 #include <pcl/point_types.h>
 #include <pcl/point_cloud.h>
@@ -61,7 +61,7 @@
 
 #include <pcl/visualization/pcl_visualizer.h>
 
-#include <use_pcl.h>
+
 
 using pcl::visualization::PointCloudColorHandlerGenericField;
 using pcl::visualization::PointCloudColorHandlerCustom;
@@ -273,7 +273,7 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
 
 
 
-	//
+	// 
 	// Run the same optimization in a loop and visualize the results
 	Eigen::Matrix4f Ti = Eigen::Matrix4f::Identity(), prev, targetToSource;
 	PointCloudWithNormals::Ptr reg_result = points_with_normals_src;
@@ -311,7 +311,7 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
 	//
 	// Transform target back in source frame
 	pcl::transformPointCloud(*cloud_tgt, *output, targetToSource);
-
+#if 0 //HJM begin
 	p->removePointCloud("source");
 	p->removePointCloud("target");
 
@@ -325,7 +325,7 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
 
 	p->removePointCloud("source");
 	p->removePointCloud("target");
-
+#endif //HJM end
 	//add the source to the transformed target
 	*output += *cloud_src;
 
