@@ -212,6 +212,7 @@ void loadData(int argc, char **argv, std::vector<PCD, Eigen::aligned_allocator<P
 */
 void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt, PointCloud::Ptr output, Eigen::Matrix4f &final_transform, bool downsample = false)
 {
+
 	//
 	// Downsample for consistency and speed
 	// \note enable this for large datasets
