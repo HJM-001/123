@@ -271,9 +271,6 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
 
 	reg.setInputSource(points_with_normals_src);
 	reg.setInputTarget(points_with_normals_tgt);
-
-
-
 	// 
 	// Run the same optimization in a loop and visualize the results
 	Eigen::Matrix4f Ti = Eigen::Matrix4f::Identity(), prev, targetToSource;
@@ -329,7 +326,6 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
 #endif //HJM end
 	//add the source to the transformed target
 	*output += *cloud_src;
-
 	final_transform = targetToSource;
 }
 
@@ -375,7 +371,7 @@ int main(int argc, char** argv)
 		//transform current pair into the global transform
 		pcl::transformPointCloud(*temp, *result, GlobalTransform); //HJM ADD: 把temp变换为result, 变换矩阵为第3个参数. 第一次执行该语句时变换矩阵为单位矩阵，因为temp已经由source变过来了
 
-																   //update the global transform
+		//update the global transform
 		GlobalTransform = GlobalTransform * pairTransform;
 
 		//save aligned pair, transformed into the first cloud's frame
