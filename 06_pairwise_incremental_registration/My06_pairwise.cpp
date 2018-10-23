@@ -60,7 +60,7 @@
 #include <pcl/registration/transforms.h>
 
 #include <pcl/visualization/pcl_visualizer.h>
-
+#include <mytimer.h>
 
 
 using pcl::visualization::PointCloudColorHandlerGenericField;
@@ -80,6 +80,11 @@ pcl::visualization::PCLVisualizer *p = 0;
 int vp_1, vp_2;
 */
 //convenient structure to handle our pointclouds
+
+//HJM add
+const double MyItrEps = 1e-6;
+const int MyItrNum = 50;
+
 struct PCD
 {
 	PointCloud::Ptr cloud;
@@ -212,7 +217,7 @@ void loadData(int argc, char **argv, std::vector<PCD, Eigen::aligned_allocator<P
 */
 void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt, PointCloud::Ptr output, Eigen::Matrix4f &final_transform, bool downsample = false)
 {
-
+	MyTimer mt; mt.StartTimer();
 	//
 	// Downsample for consistency and speed
 	// \note enable this for large datasets
@@ -233,7 +238,8 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
 		src = cloud_src;
 		tgt = cloud_tgt;
 	}
-
+	PCL_INFO("src size %d, tgt size %d\n", src->points.size(),tgt->points.size());
+	return;
 
 	// Compute surface normals and curvature
 	PointCloudWithNormals::Ptr points_with_normals_src(new PointCloudWithNormals);
@@ -262,7 +268,7 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
 	//
 	// Align
 	pcl::IterativeClosestPointNonLinear<PointNormalT, PointNormalT> reg;
-	reg.setTransformationEpsilon(1e-6);
+	reg.setTransformationEpsilon(MyItrEps);
 	// Set the maximum distance between two correspondences (src<->tgt) to 10cm
 	// Note: adjust this based on the size of your datasets
 	reg.setMaxCorrespondenceDistance(0.1);
@@ -273,12 +279,14 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
 	reg.setInputTarget(points_with_normals_tgt);
 	// 
 	// Run the same optimization in a loop and visualize the results
-	Eigen::Matrix4f Ti = Eigen::Matrix4f::Identity(), prev, targetToSource;
+	Eigen::Matrix4f Ti = Eigen::Matrix4f::Identity(), targetToSource;
 	PointCloudWithNormals::Ptr reg_result = points_with_normals_src;
-	reg.setMaximumIterations(2);  //HJM ADD：30次循环，每个循环进行一次align, 每次align迭代2次，这就是incremental
-	for (int i = 0; i < 30; ++i)
+	reg.setMaximumIterations(MyItrNum);  //HJM ADD：30次循环，每个循环进行一次align, 每次align迭代2次，这就是incremental
+	
+	int count = 0;
+	while(1)
 	{
-		PCL_INFO("Iteration Nr. %d.\n", i);
+		PCL_INFO("Iteration begin...%d\n",count++);
 
 		// save cloud for visualization purpose
 		points_with_normals_src = reg_result;
@@ -290,18 +298,23 @@ void pairAlign(const PointCloud::Ptr cloud_src, const PointCloud::Ptr cloud_tgt,
 		//accumulate transformation between each Iteration
 		Ti = reg.getFinalTransformation() * Ti;
 
+		if (reg.hasConverged())
+			break;
+		else
+			continue;
+
 		//if the difference between this transformation and the previous one
 		//is smaller than the threshold, refine the process by reducing
 		//the maximal correspondence distance
+		
+		/*
 		if (fabs((reg.getLastIncrementalTransformation() - prev).sum()) < reg.getTransformationEpsilon())
 			reg.setMaxCorrespondenceDistance(reg.getMaxCorrespondenceDistance() - 0.001);
 
 		prev = reg.getLastIncrementalTransformation();
-
-		// visualize current state
-		//showCloudsRight(points_with_normals_tgt, points_with_normals_src);
+		*/
 	}
-
+	PCL_INFO("time spend: %f \n",mt.TimeLength());
 	//
 	// Get the transformation from target to source
 	targetToSource = Ti.inverse();
@@ -361,12 +374,10 @@ int main(int argc, char** argv)
 		source = data[i - 1].cloud;
 		target = data[i].cloud;
 
-		// Add visualization data
-		//showCloudsLeft(source, target);
 
 		PointCloud::Ptr temp(new PointCloud);
 		PCL_INFO("Aligning %s (%d) with %s (%d).\n", data[i - 1].f_name.c_str(), source->points.size(), data[i].f_name.c_str(), target->points.size());
-		pairAlign(source, target, temp, pairTransform, true);
+		pairAlign(source, target, temp, pairTransform,true);
 
 		//transform current pair into the global transform
 		pcl::transformPointCloud(*temp, *result, GlobalTransform); //HJM ADD: 把temp变换为result, 变换矩阵为第3个参数. 第一次执行该语句时变换矩阵为单位矩阵，因为temp已经由source变过来了
